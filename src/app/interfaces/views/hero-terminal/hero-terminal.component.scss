@@ -1,0 +1,132 @@
+/* Styles for the standalone hero terminal component. */
+
+.hero__terminal {
+  background: rgba(12, 15, 23, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.5rem;
+  padding: 1rem;
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-width: 340px;
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 0.75rem;
+}
+
+.terminal-header__controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.terminal-dot--red {
+  background: #ff5f56;
+}
+
+.terminal-dot--yellow {
+  background: #ffbd2e;
+}
+
+.terminal-dot--green {
+  background: #27c93f;
+}
+
+.terminal-header__label {
+  color: rgba(255, 255, 255, 0.65);
+  text-transform: lowercase;
+}
+
+.terminal-shell {
+  background: rgba(7, 10, 16, 0.95);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: grid;
+  gap: 0.5rem;
+  font-family: monospace;
+  overflow-y: auto;
+  scroll-behavior: smooth; // <- hace que el autoscroll se sienta fluido
+  max-height: 320px;
+}
+
+.terminal-line {
+  color: rgba(215, 215, 215, 1);
+  line-height: 1.6;
+  white-space: pre-wrap;
+  // efecto "smooth" al aparecer cada línea (logs y comandos)
+  animation: terminal-line-in 320ms ease-out both;
+}
+
+.terminal-prompt {
+  color: rgba(180, 180, 180, 1);
+  margin-right: 0.5rem;
+}
+
+.terminal-code {
+  color: #00ff78;
+  font-family: monospace;
+}
+
+.terminal-code--highlight {
+  background: rgba(0, 217, 102, 0.08);
+  padding: 0 0.25rem;
+  border-radius: 4px;
+}
+
+.terminal-footer {
+  color: rgba(180, 180, 180, 1);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 0.75rem;
+}
+
+/* cursor parpadeante, antes no existía */
+.terminal-cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.1em;
+  background: #00ff78;
+  vertical-align: text-bottom;
+  margin-left: 2px;
+  animation: terminal-blink 1s step-end infinite;
+}
+
+@keyframes terminal-blink {
+
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes terminal-line-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

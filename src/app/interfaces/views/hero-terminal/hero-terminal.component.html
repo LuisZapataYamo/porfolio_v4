@@ -1,0 +1,53 @@
+<aside class="hero__terminal">
+  <div class="terminal-header">
+    <div class="terminal-header__controls">
+      <span class="terminal-dot terminal-dot--red"></span>
+      <span class="terminal-dot terminal-dot--yellow"></span>
+      <span class="terminal-dot terminal-dot--green"></span>
+    </div>
+    <div class="terminal-header__label">bash — architect@mainframe</div>
+  </div>
+
+  <div #terminalShell class="terminal-shell">
+    @for (line of visibleLines; track $index) {
+      <div
+        class="terminal-line"
+        [ngClass]="{
+          'terminal-line--command': line.type === 'command',
+          'terminal-line--status': line.type === 'status',
+          'terminal-line--output': line.type === 'output'
+        }"
+      >
+        @if (line.type === 'command') {
+          <span class="terminal-prompt">{{ line.prompt }}</span>
+          <span class="terminal-code" [class.terminal-code--highlight]="line.highlight">{{ line.text }}</span>
+        } @else {
+          <span>{{ line.text }}</span>
+        }
+      </div>
+    }
+
+    @if (currentTypingLine) {
+      <div class="terminal-line terminal-line--command">
+        <span class="terminal-prompt">{{ currentTypingLine.prompt }}</span>
+        <span class="terminal-code" [class.terminal-code--highlight]="currentTypingLine.highlight">{{ typedCommand }}</span>
+        @if (cursorActive) {
+          <span class="terminal-cursor"></span>
+        }
+      </div>
+    }
+
+    @if (showFinalPrompt && !currentTypingLine) {
+      <div class="terminal-line terminal-line--command">
+        <span class="terminal-prompt">archäroot:~$</span>
+        @if (cursorActive) {
+          <span class="terminal-cursor"></span>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="terminal-footer">
+    <span>Stack: Go · Kubernetes · Kafka · PostgreSQL · Angular</span>
+  </div>
+</aside>

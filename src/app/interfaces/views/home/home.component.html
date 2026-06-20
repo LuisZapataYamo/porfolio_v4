@@ -5,63 +5,22 @@
   <section class="hero">
     <div class="hero__content">
       <div class="hero__copy">
-        <span class="hero__label">SYSTEM ARCHITECTURE</span>
+        <span class="hero__label">SYSTEM STATUS: Operational</span>
         <h1 class="hero__title">
-          Build resilient
-          <span class="highlight">digital infrastructure</span>
-          for the next wave.
+          Engineerin
+          <span class="highlight">Engineering</span>
+          Engineering.
         </h1>
         <p class="hero__subtitle">
-          Modern backend architecture, distributed systems, and high-concurrency
-          design for mission-critical platforms.
+          Senior Backend Architect specialized in high-concurrency systems, distributed databases, and the art of scalable logic.
         </p>
         <div class="hero__cta">
-          <button class="btn btn--primary">LAUNCH_ARCHIVE</button>
-          <button class="btn btn--secondary">EXPLORE_STACK</button>
+          <button class="btn btn--primary">EXECUTE_PROJECTS</button>
+          <button class="btn btn--secondary">VIEW_SOURCES</button>
         </div>
       </div>
 
-      <aside class="hero__terminal">
-        <div class="terminal-header">
-          <div class="terminal-header__controls">
-            <span class="terminal-dot terminal-dot--red"></span>
-            <span class="terminal-dot terminal-dot--yellow"></span>
-            <span class="terminal-dot terminal-dot--green"></span>
-          </div>
-          <div class="terminal-header__label">bash — architect@mainframe</div>
-        </div>
-
-        <div #terminalShell class="terminal-shell">
-          <div
-            *ngFor="let line of visibleLines"
-            class="terminal-line"
-            [ngClass]="{
-              'terminal-line--command': line.type === 'command',
-              'terminal-line--status': line.type === 'status',
-              'terminal-line--output': line.type === 'output'
-            }"
-          >
-            <span *ngIf="line.type === 'command'" class="terminal-prompt">{{ line.prompt }}</span>
-            <span *ngIf="line.type === 'command'" class="terminal-code" [class.terminal-code--highlight]="line.highlight">{{ line.text }}</span>
-            <span *ngIf="line.type !== 'command'">{{ line.text }}</span>
-          </div>
-
-          <div *ngIf="currentTypingLine" class="terminal-line terminal-line--command">
-            <span class="terminal-prompt">{{ currentTypingLine.prompt }}</span>
-            <span class="terminal-code" [class.terminal-code--highlight]="currentTypingLine.highlight">{{ typedCommand }}</span>
-            <span class="terminal-cursor" *ngIf="cursorActive"></span>
-          </div>
-
-          <div *ngIf="showFinalPrompt && !currentTypingLine" class="terminal-line terminal-line--command">
-            <span class="terminal-prompt">archäroot:~$</span>
-            <span class="terminal-cursor" *ngIf="cursorActive"></span>
-          </div>
-        </div>
-
-        <div class="terminal-footer">
-          <span>Stack: Go · Kubernetes · Kafka · PostgreSQL · Angular</span>
-        </div>
-      </aside>
+      <app-hero-terminal></app-hero-terminal>
     </div>
   </section>
 

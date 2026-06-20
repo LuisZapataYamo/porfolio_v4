@@ -1,5 +1,5 @@
-@use '../../../shared/styles/variables' as *;
-@use '../../../shared/styles/mixins' as *;
+@use './variables' as *;
+@use './mixins' as *;
 
 .home {
   min-height: 100vh;
@@ -21,7 +21,7 @@
 .hero {
   position: relative;
   min-height: 100vh;
-  padding-top: spacing('xl');
+  padding-top: spacing('5xl');
   padding-bottom: spacing('xl');
   background: linear-gradient(160deg, #06080f 0%, #090a0f 100%);
   overflow: hidden;

@@ -14,3 +14,6 @@
 
 // 4. Tema (Animaciones, utilidades, variables CSS)
 @use './theme' as *;
+
+// 5. Home component global styles
+@use './home' as *;
