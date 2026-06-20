@@ -1,0 +1,384 @@
+@use 'sass:map';
+@use './variables' as *;
+
+/**
+ * MIXINS SCSS
+ * Utilidades reutilizables para estilos
+ */
+
+// ===========================
+// RESPONSIVE DESIGN
+// ===========================
+
+// Media query para breakpoints
+@mixin media($breakpoint) {
+  $size: map.get($breakpoints, $breakpoint);
+  @media (min-width: $size) {
+    @content;
+  }
+}
+
+// Media query max-width
+@mixin media-max($breakpoint) {
+  $size: map.get($breakpoints, $breakpoint);
+  @media (max-width: ($size - 1px)) {
+    @content;
+  }
+}
+
+// ===========================
+// FLEXBOX UTILITIES
+// ===========================
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-start {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: spacing('md');
+}
+
+// ===========================
+// GRID UTILITIES
+// ===========================
+
+@mixin grid($columns, $gap: spacing('md')) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+}
+
+@mixin grid-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: spacing('lg');
+}
+
+// ===========================
+// TIPOGRAFÍA
+// ===========================
+
+@mixin text($size: 'base', $weight: 'normal', $line-height: 1.5) {
+  font-family: $font-family-base;
+  font-size: font-size($size);
+  font-weight: font-weight($weight);
+  line-height: $line-height;
+}
+
+@mixin heading($size: '2xl', $weight: 'bold') {
+  @include text($size, $weight, 1.2);
+  margin: spacing('none');
+  color: color('white');
+}
+
+@mixin h1 {
+  @include heading('5xl', 'bold');
+}
+
+@mixin h2 {
+  @include heading('4xl', 'bold');
+}
+
+@mixin h3 {
+  @include heading('3xl', 'semibold');
+}
+
+@mixin h4 {
+  @include heading('2xl', 'semibold');
+}
+
+@mixin h5 {
+  @include heading('xl', 'semibold');
+}
+
+@mixin h6 {
+  @include heading('lg', 'semibold');
+}
+
+// ===========================
+// TRANSICIONES
+// ===========================
+
+@mixin transition($properties: all, $duration: 'base', $timing: 'ease') {
+  transition: $properties transition-duration($duration) transition-timing($timing);
+}
+
+@mixin hover-transition {
+  @include transition(all, 'fast', 'ease-out');
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+// ===========================
+// SOMBRAS Y EFECTOS
+// ===========================
+
+@mixin shadow($shadow-name: 'md') {
+  box-shadow: shadow($shadow-name);
+}
+
+@mixin neon-glow {
+  box-shadow: shadow('neon');
+  @include transition(box-shadow, 'base', 'ease');
+
+  &:hover {
+    box-shadow: shadow('neon-lg');
+  }
+}
+
+@mixin underline-animation {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: color('neon-green');
+    @include transition(width, 'base', 'ease-out');
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+}
+
+// ===========================
+// BUTTONS
+// ===========================
+
+@mixin button-base {
+  @include flex-center;
+  padding: spacing('md') spacing('lg');
+  font-size: font-size('base');
+  font-weight: font-weight('semibold');
+  border: none;
+  border-radius: border-radius('md');
+  cursor: pointer;
+  @include transition(all, 'fast', 'ease');
+  font-family: $font-family-base;
+}
+
+@mixin button-primary {
+  @include button-base;
+  background-color: color('neon-green');
+  color: color('dark-bg');
+
+  &:hover {
+    background-color: color('neon-green-light');
+    @include shadow('lg');
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+@mixin button-secondary {
+  @include button-base;
+  background-color: color('dark-secondary');
+  color: color('white');
+  border: 2px solid color('neon-green');
+
+  &:hover {
+    background-color: color('dark-tertiary');
+    @include shadow('neon');
+  }
+}
+
+@mixin button-ghost {
+  @include button-base;
+  background-color: transparent;
+  color: color('white');
+
+  &:hover {
+    background-color: color('dark-secondary');
+  }
+}
+
+// ===========================
+// CARDS
+// ===========================
+
+@mixin card {
+  background-color: color('dark-secondary');
+  border-radius: border-radius('lg');
+  padding: spacing('lg');
+  @include shadow('md');
+  @include transition(all, 'base', 'ease');
+
+  &:hover {
+    @include shadow('lg');
+    transform: translateY(-4px);
+  }
+}
+
+// ===========================
+// INPUTS
+// ===========================
+
+@mixin input-base {
+  width: 100%;
+  padding: spacing('md') spacing('lg');
+  font-size: font-size('base');
+  border-radius: border-radius('md');
+  border: 2px solid color('dark-tertiary');
+  background-color: color('dark-secondary');
+  color: color('white');
+  @include transition(all, 'fast', 'ease');
+  font-family: $font-family-base;
+
+  &:focus {
+    outline: none;
+    border-color: color('neon-green');
+    box-shadow: 0 0 0 3px rgba(0, 217, 102, 0.1);
+  }
+
+  &::placeholder {
+    color: color('gray-dark');
+  }
+}
+
+// ===========================
+// OVERLAP/SCROLL
+// ===========================
+
+@mixin scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: color('gray-dark') transparent;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: color('gray-dark');
+    border-radius: border-radius('full');
+
+    &:hover {
+      background: color('gray');
+    }
+  }
+}
+
+// ===========================
+// TEXTO
+// ===========================
+
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin text-gradient {
+  background: linear-gradient(135deg, color('neon-green'), color('neon-green-light'));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@mixin line-clamp($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// ===========================
+// CENTERING
+// ===========================
+
+@mixin center-absolute {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin center-fixed {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// ===========================
+// VISIBILITY
+// ===========================
+
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+@mixin container-width($max-width: 1200px) {
+  width: 100%;
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 0 spacing('lg');
+
+  @include media-max('md') {
+    padding: 0 spacing('md');
+  }
+}
+
+// ===========================
+// SECTION
+// ===========================
+
+@mixin section($padding-top: 5rem, $padding-bottom: 5rem) {
+  padding: $padding-top spacing('lg') $padding-bottom spacing('lg');
+
+  @include media-max('md') {
+    padding: 3rem spacing('md');
+  }
+
+  @include media-max('sm') {
+    padding: 2rem spacing('md');
+  }
+}

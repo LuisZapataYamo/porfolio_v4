@@ -1,0 +1,59 @@
+@use '../../../shared/styles/variables' as *;
+@use '../../../shared/styles/mixins' as *;
+
+.home-nav {
+  @include section;
+  @include flex-center;
+  justify-content: space-between;
+  gap: spacing('lg');
+  padding: spacing('lg') spacing('2xl');
+  position: relative;
+  z-index: 2;
+
+  &__brand {
+    @include text('xl', 'bold');
+    color: color('white');
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  &__links {
+    display: flex;
+    gap: spacing('xl');
+    align-items: center;
+
+    @include media-max('md') {
+      display: none;
+    }
+  }
+
+  &__link {
+    @include text('sm', 'medium');
+    color: color('gray-light');
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: color 0.2s ease;
+
+    &:hover,
+    &.active {
+      color: color('white');
+    }
+
+    &.active::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, color('neon-green'), color('neon-green-light'));
+    }
+  }
+
+  &__button {
+    @include button-secondary;
+    @include text('sm', 'medium');
+    padding: spacing('sm') spacing('md');
+  }
+}

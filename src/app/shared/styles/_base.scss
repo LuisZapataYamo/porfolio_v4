@@ -1,0 +1,298 @@
+@use './variables' as *;
+@use './mixins' as *;
+
+/**
+ * BASE STYLES
+ * Reset y estilos globales
+ */
+
+// ===========================
+// RESET
+// ===========================
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  @include text('base', 'normal', 1.6);
+  background-color: color('dark-bg');
+  color: color('white');
+  font-family: $font-family-base;
+  overflow-x: hidden;
+  @include scrollbar;
+}
+
+// ===========================
+// TIPOGRAFÍA GLOBAL
+// ===========================
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: color('white');
+  font-weight: font-weight('bold');
+  line-height: 1.2;
+  margin-bottom: spacing('md');
+}
+
+h1 {
+  @include h1;
+}
+
+h2 {
+  @include h2;
+}
+
+h3 {
+  @include h3;
+}
+
+h4 {
+  @include h4;
+}
+
+h5 {
+  @include h5;
+}
+
+h6 {
+  @include h6;
+}
+
+p {
+  margin-bottom: spacing('md');
+  color: color('gray-light');
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+a {
+  color: color('neon-green');
+  text-decoration: none;
+  @include transition(color, 'fast', 'ease');
+
+  &:hover {
+    color: color('neon-green-light');
+  }
+}
+
+// ===========================
+// LISTAS
+// ===========================
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  margin-bottom: spacing('sm');
+}
+
+// ===========================
+// TABLAS
+// ===========================
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: spacing('lg');
+}
+
+th,
+td {
+  padding: spacing('md');
+  text-align: left;
+  border-bottom: 1px solid color('dark-tertiary');
+}
+
+th {
+  background-color: color('dark-secondary');
+  font-weight: font-weight('bold');
+  color: color('white');
+}
+
+tr:last-child {
+  td {
+    border-bottom: none;
+  }
+}
+
+// ===========================
+// CÓDIGO Y PRE
+// ===========================
+
+code,
+pre {
+  font-family: $font-family-mono;
+  background-color: color('dark-secondary');
+  color: color('neon-green');
+  border-radius: border-radius('md');
+}
+
+code {
+  padding: 2px 6px;
+  font-size: font-size('sm');
+}
+
+pre {
+  padding: spacing('lg');
+  overflow-x: auto;
+  @include scrollbar;
+  margin-bottom: spacing('lg');
+
+  code {
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+  }
+}
+
+// ===========================
+// FORMULARIOS
+// ===========================
+
+input,
+textarea,
+select {
+  @include input-base;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+label {
+  display: block;
+  margin-bottom: spacing('sm');
+  font-weight: font-weight('medium');
+  color: color('gray-light');
+}
+
+// ===========================
+// IMÁGENES
+// ===========================
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+// ===========================
+// COMPONENTES ESPECÍFICOS
+// ===========================
+
+hr {
+  border: none;
+  border-top: 1px solid color('dark-tertiary');
+  margin: spacing('lg') 0;
+}
+
+blockquote {
+  border-left: 4px solid color('neon-green');
+  padding-left: spacing('lg');
+  margin: spacing('lg') 0;
+  color: color('gray-light');
+  font-style: italic;
+}
+
+strong {
+  font-weight: font-weight('bold');
+  color: color('neon-green');
+}
+
+em {
+  font-style: italic;
+}
+
+// ===========================
+// UTILITY CLASSES
+// ===========================
+
+.container {
+  @include container-width(1200px);
+}
+
+.section {
+  padding: spacing('5xl') spacing('lg');
+
+  @include media-max('md') {
+    padding: spacing('3xl') spacing('md');
+  }
+}
+
+.section-title {
+  @include h2;
+  margin-bottom: spacing('lg');
+  position: relative;
+  padding-bottom: spacing('md');
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background-color: color('neon-green');
+    border-radius: border-radius('full');
+  }
+}
+
+.text-muted {
+  color: color('gray');
+}
+
+.text-success {
+  color: color('success');
+}
+
+.text-error {
+  color: color('error');
+}
+
+.text-warning {
+  color: color('warning');
+}
+
+.text-info {
+  color: color('info');
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}

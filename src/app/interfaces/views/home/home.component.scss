@@ -1,0 +1,505 @@
+@use '../../../shared/styles/variables' as *;
+@use '../../../shared/styles/mixins' as *;
+
+.home {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.section-title {
+  @include h2;
+  margin-bottom: spacing('3xl');
+  color: color('white');
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+// ===========================
+// HERO SECTION
+// ===========================
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  padding-top: spacing('xl');
+  padding-bottom: spacing('xl');
+  background: linear-gradient(160deg, #06080f 0%, #090a0f 100%);
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: -10%;
+    width: 480px;
+    height: 480px;
+    background: radial-gradient(circle, rgba(0, 217, 102, 0.16), transparent 65%);
+    filter: blur(28px);
+    z-index: 0;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -120px;
+    right: -100px;
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, rgba(0, 217, 102, 0.08), transparent 70%);
+    filter: blur(32px);
+    z-index: 0;
+  }
+
+  &__content {
+    @include container-width;
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(320px, 1fr);
+    gap: spacing('5xl');
+    align-items: center;
+    position: relative;
+    z-index: 1;
+
+    @include media-max('md') {
+      grid-template-columns: 1fr;
+      gap: spacing('4xl');
+      text-align: center;
+    }
+  }
+
+  &__copy {
+    max-width: 720px;
+  }
+
+  &__label {
+    @include text('sm', 'medium');
+    color: color('neon-green-light');
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    display: inline-block;
+    margin-bottom: spacing('md');
+  }
+
+  &__title {
+    @include h1;
+    margin-bottom: spacing('lg');
+    line-height: 1.02;
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    max-width: 680px;
+
+    .highlight {
+      @include text-gradient;
+      display: inline-block;
+    }
+  }
+
+  &__subtitle {
+    @include text('lg', 'normal');
+    color: color('gray-light');
+    max-width: 600px;
+    margin-bottom: spacing('3xl');
+    line-height: 1.7;
+  }
+
+  &__cta {
+    display: flex;
+    align-items: center;
+    gap: spacing('lg');
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    @include media-max('md') {
+      justify-content: center;
+    }
+  }
+
+  &__terminal {
+    background: rgba(12, 15, 23, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: border-radius('xl');
+    padding: spacing('md');
+    box-shadow: 0 40px 90px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    gap: spacing('lg');
+    min-width: 340px;
+
+    @include media-max('md') {
+      margin: 0 auto;
+      max-width: 560px;
+    }
+  }
+
+  .terminal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: spacing('md');
+    padding: spacing('sm') spacing('md');
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: border-radius('lg');
+  }
+
+  .terminal-header__controls {
+    display: flex;
+    gap: spacing('sm');
+  }
+
+  .terminal-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .terminal-dot--red { background: #ff5f56; }
+  .terminal-dot--yellow { background: #ffbd2e; }
+  .terminal-dot--green { background: #27c93f; }
+
+  .terminal-header__label {
+    @include text('sm', 'medium');
+    color: color('gray');
+    letter-spacing: 0.08em;
+    text-transform: lowercase;
+  }
+
+  .terminal-shell {
+    background: rgba(7, 10, 16, 0.95);
+    border-radius: border-radius('lg');
+    padding: spacing('lg');
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: grid;
+    gap: spacing('sm');
+    font-family: $font-family-mono;
+    overflow: hidden;
+  }
+
+  .terminal-line {
+    @include text('sm', 'normal');
+    color: color('gray-light');
+    line-height: 1.6;
+    white-space: pre-wrap;
+  }
+
+  .terminal-cursor {
+    display: inline-block;
+    width: 10px;
+    height: 18px;
+    margin-left: spacing('xs');
+    background: color('neon-green-light');
+    border-radius: 2px;
+    animation: terminalCursorBlink 1s steps(2, start) infinite;
+    vertical-align: middle;
+  }
+
+  .terminal-line--command .terminal-code {
+    color: color('neon-green-light');
+  }
+
+  .terminal-line--status {
+    color: color('gray-light');
+  }
+
+  .terminal-line--output {
+    color: color('white');
+  }
+
+  @keyframes terminalCursorBlink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  .terminal-line--command {
+    color: color('white');
+  }
+
+  @keyframes terminalLineAppear {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes terminalCursorBlink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  .terminal-line--command {
+    color: color('white');
+  }
+
+  .terminal-prompt {
+    color: color('gray');
+    margin-right: spacing('sm');
+  }
+
+  .terminal-code {
+    color: color('neon-green-light');
+    font-family: $font-family-mono;
+  }
+
+  .terminal-code--highlight {
+    background: rgba(0, 217, 102, 0.08);
+    padding: 0 spacing('xs');
+    border-radius: border-radius('sm');
+  }
+
+  .terminal-line--status {
+    color: color('gray-light');
+  }
+
+  .terminal-line--output {
+    color: color('white');
+  }
+
+  .terminal-footer {
+    @include text('sm', 'normal');
+    color: color('gray');
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: spacing('md');
+  }
+}
+
+@keyframes moveGradient {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-20px, -20px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes moveGradient {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-20px, -20px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+// ===========================
+// SKILLS SECTION
+// ===========================
+
+.skills-section {
+  @include section;
+  background-color: color('dark-secondary');
+
+  &__grid {
+    @include grid-auto;
+  }
+}
+
+// ===========================
+// SKILL CARD
+// ===========================
+
+.skill-card {
+  @include card;
+  text-align: center;
+
+  &__icon {
+    font-size: font-size('5xl');
+    margin-bottom: spacing('md');
+    @include transition(transform, 'base', 'ease');
+
+    .skill-card:hover & {
+      transform: scale(1.1) rotate(5deg);
+    }
+  }
+
+  &__name {
+    @include h5;
+    margin-bottom: spacing('xs');
+    @include text-gradient;
+  }
+
+  &__category {
+    @include text('sm', 'normal');
+    color: color('gray');
+    margin-bottom: spacing('md');
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  &__level {
+    display: inline-block;
+    padding: spacing('xs') spacing('md');
+    background-color: color('dark-tertiary');
+    border-radius: border-radius('full');
+    font-size: font-size('xs');
+    font-weight: font-weight('semibold');
+    color: color('neon-green');
+    border: 1px solid color('neon-green');
+  }
+}
+
+// ===========================
+// PROJECTS SECTION
+// ===========================
+
+.projects-section {
+  @include section;
+
+  &__grid {
+    @include grid(3);
+    gap: spacing('2xl');
+
+    @include media-max('md') {
+      @include grid(2);
+    }
+
+    @include media-max('sm') {
+      @include grid(1);
+    }
+  }
+}
+
+// ===========================
+// PROJECT CARD
+// ===========================
+
+.project-card {
+  @include card;
+  overflow: hidden;
+
+  &__image {
+    width: 100%;
+    height: 200px;
+    border-radius: border-radius('lg') border-radius('lg') 0 0;
+    object-fit: cover;
+    margin: -#{spacing('lg')} -#{spacing('lg')} spacing('lg') -#{spacing('lg')};
+    @include transition(transform, 'base', 'ease');
+
+    .project-card:hover & {
+      transform: scale(1.05);
+    }
+  }
+
+  &__content {
+    @include flex-column;
+  }
+
+  &__title {
+    @include h4;
+    margin-bottom: spacing('sm');
+    color: color('white');
+  }
+
+  &__description {
+    @include text('sm', 'normal');
+    color: color('gray-light');
+    margin-bottom: spacing('lg');
+    @include line-clamp(2);
+  }
+
+  &__technologies {
+    @include flex-wrap;
+    margin-bottom: spacing('lg');
+
+    .tag {
+      padding: spacing('xs') spacing('sm');
+      background-color: color('dark-tertiary');
+      border-radius: border-radius('full');
+      font-size: font-size('xs');
+      color: color('neon-green');
+      border: 1px solid color('neon-green');
+    }
+  }
+}
+
+// ===========================
+// FOOTER
+// ===========================
+
+.footer {
+  background-color: color('dark-secondary');
+  padding: spacing('3xl') spacing('lg');
+  margin-top: spacing('5xl');
+  border-top: 1px solid color('dark-tertiary');
+
+  &__content {
+    @include container-width;
+    @include grid(3);
+    gap: spacing('2xl');
+    margin-bottom: spacing('2xl');
+
+    @include media-max('md') {
+      @include grid(1);
+    }
+  }
+
+  &__section {
+    @include flex-column;
+
+    h4 {
+      @include h4;
+      margin-bottom: spacing('md');
+      color: color('neon-green');
+    }
+
+    a,
+    p {
+      @include text('sm', 'normal');
+      color: color('gray-light');
+      margin-bottom: spacing('sm');
+    }
+
+    a {
+      @include underline-animation;
+
+      &:hover {
+        color: color('neon-green-light');
+      }
+    }
+  }
+
+  &__copy {
+    text-align: center;
+    padding-top: spacing('2xl');
+    border-top: 1px solid color('dark-tertiary');
+    color: color('gray-dark');
+    font-size: font-size('sm');
+  }
+}
+
+// ===========================
+// BUTTONS
+// ===========================
+
+.btn {
+  @include button-base;
+
+  &--primary {
+    @include button-primary;
+  }
+
+  &--secondary {
+    @include button-secondary;
+  }
+
+  &--ghost {
+    @include button-ghost;
+  }
+}
+
+// ===========================
+// CONTAINER
+// ===========================
+
+.container {
+  @include container-width;
+}
+

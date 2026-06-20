@@ -1,1 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+/**
+ * ESTILOS GLOBALES
+ * Punto de entrada para todos los estilos de la aplicación
+ */
+
+// Importar sistema de estilos de shared
+@use './app/shared/styles/styles' as *;

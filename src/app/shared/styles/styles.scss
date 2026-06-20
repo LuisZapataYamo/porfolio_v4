@@ -1,0 +1,16 @@
+/**
+ * ESTILOS GLOBALES PRINCIPALES
+ * Importa todas las capas de estilos
+ */
+
+// 1. Variables (Colores, tipografías, espaciado)
+@use './variables' as *;
+
+// 2. Mixins (Utilidades reutilizables)
+@use './mixins' as *;
+
+// 3. Estilos base (Reset, tipografía global, formularios)
+@use './base' as *;
+
+// 4. Tema (Animaciones, utilidades, variables CSS)
+@use './theme' as *;
