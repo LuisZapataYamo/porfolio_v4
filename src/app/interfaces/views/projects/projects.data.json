@@ -1,0 +1,68 @@
+[
+  {
+    "id": "cache",
+    "fileName": "distributed_cache.go",
+    "fileKind": "go",
+    "iconLabel": "GO",
+    "language": "Golang 1.21",
+    "title": "High-Performance Distributed Cache",
+    "description": "A custom-built, low-latency distributed caching engine featuring consistent hashing and automatic data sharding.",
+    "metrics": [
+      { "label": "Latency", "value": "< 2ms (p99)" },
+      { "label": "Throughput", "value": "1.2M RPS" },
+      { "label": "Availability", "value": "99.99%" }
+    ],
+    "codename": "Mercury",
+    "projectCode": "PRJ-01",
+    "badge": "STABLE",
+    "badgeState": "stable",
+    "repoUrl": "#",
+    "docsUrl": "#",
+    "cursorLine": 42,
+    "cursorCol": 8
+  },
+  {
+    "id": "gateway",
+    "fileName": "grpc_gateway.rs",
+    "fileKind": "rust",
+    "iconLabel": "RS",
+    "language": "Rust 1.78",
+    "title": "Microservices Orchestration Platform",
+    "description": "Enterprise-grade platform for orchestrating microservices with advanced routing and load balancing.",
+    "metrics": [
+      { "label": "Services Routed", "value": "80+" },
+      { "label": "Uptime", "value": "99.95%" },
+      { "label": "Avg Hop Latency", "value": "4ms" }
+    ],
+    "codename": "Atlas",
+    "projectCode": "PRJ-02",
+    "badge": "ACTIVE",
+    "badgeState": "active",
+    "repoUrl": "#",
+    "docsUrl": "#",
+    "cursorLine": 17,
+    "cursorCol": 22
+  },
+  {
+    "id": "stream",
+    "fileName": "event_stream.py",
+    "fileKind": "python",
+    "iconLabel": "PY",
+    "language": "Python 3.12",
+    "title": "Real-time Event Processing",
+    "description": "High-throughput event streaming system with complex event processing and real-time analytics.",
+    "metrics": [
+      { "label": "Events / sec", "value": "450K" },
+      { "label": "Pipeline Lag", "value": "< 50ms" },
+      { "label": "Retention", "value": "7 days" }
+    ],
+    "codename": "Tempest",
+    "projectCode": "PRJ-03",
+    "badge": "BETA",
+    "badgeState": "beta",
+    "repoUrl": "#",
+    "docsUrl": "#",
+    "cursorLine": 103,
+    "cursorCol": 14
+  }
+]

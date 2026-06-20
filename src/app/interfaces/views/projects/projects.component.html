@@ -1,0 +1,107 @@
+<section class="projects-section">
+  <div class="container">
+    <h2 class="section-title">Workspace_Projects</h2>
+
+    <div class="ide">
+      <aside class="ide__sidebar">
+        <div class="ide__sidebar-header">
+          <span>Explorer</span>
+          <button type="button" class="ide__icon-btn" aria-label="Más opciones">⋯</button>
+        </div>
+
+        <button
+          type="button"
+          class="ide__section-toggle"
+          [class.is-collapsed]="!explorerExpanded"
+          (click)="toggleExplorer()"
+        >
+          <span class="ide__chevron">▾</span>
+          Active_Builds
+        </button>
+
+        @if (explorerExpanded) {
+          <nav class="ide__file-list">
+            @for (project of projects; track project.id) {
+              <button
+                type="button"
+                class="ide__file"
+                [class.is-active]="project.id === activeProjectId"
+                (click)="selectProject(project.id)"
+              >
+                <span class="file-icon file-icon--{{ project.fileKind }}">{{ project.iconLabel }}</span>
+                {{ project.fileName }}
+              </button>
+            }
+          </nav>
+        }
+      </aside>
+
+      <div class="ide__main">
+        <div class="ide__tabs">
+          @for (tab of openTabs; track tab.id) {
+            <div class="ide__tab" [class.is-active]="tab.id === activeProjectId">
+              <button type="button" class="ide__tab-select" (click)="selectProject(tab.id)">
+                <span class="file-icon file-icon--{{ tab.fileKind }}">{{ tab.iconLabel }}</span>
+                {{ tab.fileName }}
+              </button>
+              <button
+                type="button"
+                class="ide__tab-close"
+                (click)="closeTab(tab.id, $event)"
+                aria-label="Cerrar {{ tab.fileName }}"
+              >×</button>
+            </div>
+          }
+        </div>
+
+        <div class="ide__panel">
+          <div class="ide__panel-content" [class.panel--enter]="animatePanel">
+            <h3 class="ide__project-title">{{ activeProject.title }}</h3>
+            <p class="ide__project-description">{{ activeProject.description }}</p>
+
+            <span class="ide__metrics-label">System_Metrics</span>
+            <ul class="ide__metrics-list">
+              @for (metric of activeProject.metrics; track metric.label) {
+                <li>
+                  <span class="ide__metric-dot"></span>
+                  {{ metric.label }}: <strong>{{ metric.value }}</strong>
+                </li>
+              }
+            </ul>
+
+            <div class="ide__actions">
+              <a class="btn btn--primary" [href]="activeProject.repoUrl">
+                <span>&lt;/&gt;</span> View_Repository
+              </a>
+              <a class="btn btn--ghost" [href]="activeProject.docsUrl">
+                <span>↗</span> Documentation
+              </a>
+            </div>
+          </div>
+
+          <div class="ide__art" [class.panel--enter]="animatePanel">
+            <div class="ide__art-canvas">
+              <span class="ide__art-codename">{{ activeProject.codename }}</span>
+            </div>
+            <div class="ide__art-footer">
+              <span class="ide__art-id">ID: {{ activeProject.projectCode }}</span>
+              <span class="badge badge--{{ activeProject.badgeState }}">{{ activeProject.badge }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ide__statusbar">
+          <div class="ide__statusbar-left">
+            <span>⎇ main*</span>
+            <span>↻ sync_ok</span>
+          </div>
+          <div class="ide__statusbar-right">
+            <span>UTF-8</span>
+            <span>{{ activeProject.language }}</span>
+            <span>Ln {{ activeProject.cursorLine }}, Col {{ activeProject.cursorCol }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
