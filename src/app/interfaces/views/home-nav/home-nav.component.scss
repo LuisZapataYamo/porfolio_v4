@@ -8,6 +8,7 @@
   gap: spacing('lg');
   padding: spacing('lg') spacing('2xl');
   position: relative;
+  height: var(--navbar-height);
   z-index: 2;
 
   &__brand {
