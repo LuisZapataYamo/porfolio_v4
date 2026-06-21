@@ -36,7 +36,7 @@
     "vitest": "4.0.8"
   },
   "pnpm": {
-    "allowedBuildScripts": [
+    "onlyBuiltDependencies": [
       "@parcel/watcher",
       "esbuild",
       "lmdb",
